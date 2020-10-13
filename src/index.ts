@@ -36,6 +36,7 @@ export interface VueLoaderOptions {
   // https://babeljs.io/docs/en/next/babel-parser#plugins
   babelParserPlugins?: SFCScriptCompileOptions['babelParserPlugins']
   transformAssetUrls?: SFCTemplateCompileOptions['transformAssetUrls']
+  ssr?: boolean
   compiler?: TemplateCompiler | string
   compilerOptions?: CompilerOptions
   hotReload?: boolean
@@ -83,7 +84,7 @@ export default function loader(
   const options = (loaderUtils.getOptions(loaderContext) ||
     {}) as VueLoaderOptions
 
-  const isServer = target === 'node'
+  const isServer = options.ssr || target === 'node'
   const isProduction = mode === 'production'
 
   const { descriptor, errors } = parse(source, {

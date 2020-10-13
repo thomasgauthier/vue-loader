@@ -34,7 +34,7 @@ const TemplateLoader: webpack.loader.Loader = function (source, inMap) {
     source,
     inMap,
     filename: loaderContext.resourcePath,
-    ssr: loaderContext.target === 'node',
+    ssr: options.ssr || loaderContext.target === 'node',
     compiler,
     compilerOptions: {
       ...options.compilerOptions,
